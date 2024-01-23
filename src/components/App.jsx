@@ -2,10 +2,17 @@ import React, { useState } from "react";
 
 function App() {
   const [inputValue , setInputValue] = useState("");
+  const [items, setItems] = useState([]);
 
   function handleInputChange(event) {
     const newValue = event.target.value;
     setInputValue(newValue);
+  }
+
+  function addItem() {
+    setItems( (prevItems) => {
+      return [...prevItems, inputValue];
+    })
   }
 
   return (
@@ -18,15 +25,13 @@ function App() {
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button>
+        <button onClick={addItem}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        {items.map((toDoItem) => <li>{toDoItem}</li> )}
         </ul>
       </div>
     </div>
